@@ -1,0 +1,8 @@
+
+build/*
+build_web/*
+butterflies
+butterflies_web.zip
+config.mk
+*.sublime-project
+*.sublime-workspace
