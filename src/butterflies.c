@@ -53,8 +53,6 @@ static int phi_loc = -1;
 static int scale_loc = -1;
 static int offset_loc = -1;
 static int distrib_loc = -1;
-static int color1_loc = - 1;
-static int color2_loc = - 1;
 
 
 static void init_assets(void);
@@ -125,11 +123,6 @@ static void main_loop(void)
     SetShaderValue(butt_shader, scale_loc, &scale, SHADER_UNIFORM_VEC3);
     SetShaderValue(butt_shader, offset_loc, &offset, SHADER_UNIFORM_VEC3);
     SetShaderValue(butt_shader, distrib_loc, &butt_distrib, SHADER_UNIFORM_FLOAT);
-
-    Vector4 nc1 = ColorNormalize(butt_color1);
-    SetShaderValue(butt_shader, color1_loc, &nc1, SHADER_UNIFORM_VEC4);
-    Vector4 nc2 = ColorNormalize(butt_color2);
-    SetShaderValue(butt_shader, color2_loc, &nc2, SHADER_UNIFORM_VEC4);
 
     BeginMode3D(camera);
     
@@ -207,8 +200,6 @@ static void init_assets(void)
     scale_loc = GetShaderLocation(butt_shader, "scale");
     offset_loc = GetShaderLocation(butt_shader, "offset");
     distrib_loc = GetShaderLocation(butt_shader, "distribution");
-    color1_loc = GetShaderLocation(butt_shader, "color1");
-    color2_loc = GetShaderLocation(butt_shader, "color2");
 
     butt_mat = LoadMaterialDefault();
     butt_mat.shader = butt_shader;
@@ -302,13 +293,6 @@ static void draw_controls(void)
     GuiSliderBar((Rectangle){20, 100 + 28 * 10, 140, 20}, NULL, "scale_y", &scale.y, 0.1, 300.0);
     GuiSliderBar((Rectangle){20, 100 + 28 * 11, 140, 20}, NULL, "scale_z", &scale.z, 0.1, 300.0);
     GuiSliderBar((Rectangle){20, 100 + 28 * 12, 140, 20}, NULL, "distribution", &butt_distrib, 0.0, 1.0);
-
-    // GuiSliderBar((Rectangle){20, 100 + 28 * 12, 140, 20}, NULL, "offset_x", &offset.x, -100.0, 100.0);
-    // GuiSliderBar((Rectangle){20, 100 + 28 * 13, 140, 20}, NULL, "offset_y", &offset.y, -100.0, 100.0);
-    // GuiSliderBar((Rectangle){20, 100 + 28 * 14, 140, 20}, NULL, "offset_z", &offset.z, -100.0, 100.0);
-    // GuiColorPicker((Rectangle){20, 100 + 28 * 13, 100, 80}, "color 1", &butt_color1);
-    // GuiColorPicker((Rectangle){20, 100 + 28 * 13 + 80 + 8, 100, 80}, "color 2", &butt_color2);
-
 
     DrawText("O to show/hide controls", 20, 100 + 28 * 14, 20, GRAY);
     DrawText("RMB + WSAD to navigate", 20, 100 + 28 * 15, 20, GRAY);
