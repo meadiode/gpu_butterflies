@@ -95,6 +95,8 @@ int main(void)
 
 static void main_loop(void)
 {
+    static float time = 0.0;
+
     if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
     {
         int n_upd = IsKeyDown(KEY_LEFT_SHIFT) ? 10 : 1;
@@ -112,7 +114,7 @@ static void main_loop(void)
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
-    float time = GetTime() * t_factor;
+    time += GetFrameTime() * t_factor;
 
     SetShaderValue(butt_shader, time_loc, &time, SHADER_UNIFORM_FLOAT);
     SetShaderValue(butt_shader, dispersion_loc, &dispersion, SHADER_UNIFORM_FLOAT);
@@ -281,7 +283,7 @@ static void draw_controls(void)
 
     n_butterflies = (int)fnum * MULTIPLIERS[mp_id];
 
-    GuiSliderBar((Rectangle){20, 100 + 28 * 2, 140, 20}, NULL, "t factor", &t_factor, 0.001, 0.1);
+    GuiSliderBar((Rectangle){20, 100 + 28 * 2, 140, 20}, NULL, "t factor", &t_factor, -0.01, 0.1);
     GuiSliderBar((Rectangle){20, 100 + 28 * 3, 140, 20}, NULL, "dispersion", &dispersion, 0.0, 80.0);
 
     GuiSpinner((Rectangle){20, 100 + 28 * 4, 140, 20}, "nx", &nx, 1, 3000, false);

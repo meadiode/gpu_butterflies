@@ -9,6 +9,11 @@ Could be used as a light GPU stress-test.
 ![screenshot 1](images/screenshot01.png)
 ![screenshot 2](images/screenshot02.png)
 
+
+## Launch in browser
+https://meadiode.github.io/
+
+
 ## Building on Linux
 
 ### Prerequisites
